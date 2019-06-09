@@ -1,1 +1,1 @@
-## React Demo App
+## React App
