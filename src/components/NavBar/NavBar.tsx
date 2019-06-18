@@ -7,11 +7,11 @@ export class NavBar extends PureComponent<WithStyles<typeof styles>> {
 	render() {
 		return (
 			<div className={cn(this.props.classes.navBar, "container")}>
-				<a>conduit</a>
+				<a className={this.props.classes.brand}>conduit</a>
 				<ul className={this.props.classes.navMenu}>
-					<li>Home</li>
-					<li>Sign in</li>
-					<li>Sign up</li>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Sign in</a></li>
+					<li><a href="#">Sign up</a></li>
 				</ul>
 			</div>
 		);
