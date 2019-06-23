@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import { Container, Tabs, Tab, Typography } from "@material-ui/core";
 import MainSectionState from "./MainSectionState";
 import GlobalFeedTab from "./GlobalFeedTab";
+import TagsFilter from "../TagsFilter";
 
 const TabContainer: FunctionComponent = (props) => (
 	<Typography component="div">
@@ -28,6 +29,16 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 			content: <TabContainer><GlobalFeedTab /></TabContainer>
 		}
 	];
+
+	filterTags: string[] = [
+		"khalid",
+		"test"
+	];
+
+	filterArticles = (tag: string) => {
+		// filter
+	}
+
 	getTabContent = (tabIndex: number = 0) => {
 		return this.tabs[tabIndex];
 	}
@@ -45,7 +56,7 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 						{this.tabs[this.state.tabIndex].content}
 					</Box>
 					<Box p={1} flexGrow={1} className={this.props.classes.filtersContainer}>
-						filters
+						<TagsFilter tags={this.filterTags} action={this.filterArticles}/>
 					</Box>
 				</Box>
 			</Container>

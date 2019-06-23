@@ -11,7 +11,8 @@ const styles = (theme: Theme) =>
         },
         filtersContainer: {
             paddingTop: "0",
-            paddingBottom: "0"
+            paddingBottom: "0",
+            maxWidth: "30%"
         },
         tabTitle: {
             textTransform: "none",
