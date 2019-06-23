@@ -1,7 +1,7 @@
-import { GlobalFeedTab } from "./GlobalFeedTab";
+import { DemoTabContent } from "./DemoTabContent";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "./styles";
 
 const stylesHoc = withStyles(styles);
 
-export default stylesHoc(GlobalFeedTab);
+export default stylesHoc(DemoTabContent);
