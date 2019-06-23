@@ -42,7 +42,7 @@ const styles = (theme: Theme) =>
             border: "1px solid #398439",
             color: "#5CB85C",
             
-            "&:hover": {
+            "&:hover, &.selected": {
                 color: "#fff",
                 backgroundColor: "#398439",
                 borderColor: "#2d672d"

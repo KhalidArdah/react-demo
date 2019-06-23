@@ -6,6 +6,7 @@ import Article from "../../interfaces/Article";
 import moment from "moment";
 import Favorite from "@material-ui/icons/Favorite";
 import Badge from '@material-ui/core/Badge';
+import cn from "classnames";
 
 interface ArticleCardProps {
     article: Article
@@ -16,10 +17,15 @@ const StyledBadge = withStyles(() => ({
       top: '50%',
       right: -3,
       fontSize: "0.8rem"
-    },
+    }
 }))(Badge);
 
 export class ArticleCard extends PureComponent<ArticleCardProps & WithStyles<typeof styles>> {
+
+    handleBadgeClick = () => {
+        console.log("toggleFavorite");
+    }
+
 	render() {
         const { classes, article } = this.props;
 		return (
@@ -31,7 +37,7 @@ export class ArticleCard extends PureComponent<ArticleCardProps & WithStyles<typ
                         </Avatar>
                     }
                     action={
-                        <IconButton aria-label="Cart" classes={{root: classes.favBtn}}>
+                        <IconButton aria-label="Cart" classes={{root: cn(classes.favBtn, {selected: article.favorited})}} onClick={this.handleBadgeClick}>
                             <StyledBadge badgeContent={article.favoritesCount}>
                                 <Favorite classes={{root: classes.favIcon}}/>
                             </StyledBadge>

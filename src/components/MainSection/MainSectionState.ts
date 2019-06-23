@@ -1,3 +1,11 @@
-export default interface MainSectionState {
-	tabIndex: number
+import { TabContainer } from "./TabContainer";
+
+export interface MainSectionState {
+	tabIndex: number,
+	tabs: DemoTab[]
+}
+
+export interface DemoTab {
+	title: string,
+	content: TabContainer
 }
