@@ -28,6 +28,16 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 			content: <TabContainer>GlobalFeedTab</TabContainer>
 		}
 	];
+
+	filterTags: string[] = [
+		"khalid",
+		"test"
+	];
+
+	filterArticles = (tag: string) => {
+		// filter
+	}
+
 	getTabContent = (tabIndex: number = 0) => {
 		return this.tabs[tabIndex];
 	}
@@ -45,7 +55,7 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 						{this.tabs[this.state.tabIndex].content}
 					</Box>
 					<Box p={1} flexGrow={1} className={this.props.classes.filtersContainer}>
-						<TagsFilter />
+						<TagsFilter tags={this.filterTags} action={this.filterArticles}/>
 					</Box>
 				</Box>
 			</Container>
