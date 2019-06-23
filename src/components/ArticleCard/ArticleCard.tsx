@@ -21,37 +21,38 @@ const StyledBadge = withStyles(() => ({
 
 export class ArticleCard extends PureComponent<ArticleCardProps & WithStyles<typeof styles>> {
 	render() {
+        const { classes, article } = this.props;
 		return (
-            <Card className={this.props.classes.card}>
+            <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="Recipe" className={this.props.classes.avatar}>
-                            { this.props.article.author.username? this.props.article.author.username[0]: "" }
+                        <Avatar aria-label="Recipe" className={classes.avatar}>
+                            {article.author.username? article.author.username[0]: ""}
                         </Avatar>
                     }
                     action={
-                        <IconButton aria-label="Cart" classes={{root: this.props.classes.favBtn}}>
-                            <StyledBadge badgeContent={this.props.article.favoritesCount}>
-                                <Favorite classes={{root: this.props.classes.favIcon}}/>
+                        <IconButton aria-label="Cart" classes={{root: classes.favBtn}}>
+                            <StyledBadge badgeContent={article.favoritesCount}>
+                                <Favorite classes={{root: classes.favIcon}}/>
                             </StyledBadge>
                         </IconButton>
                     }
-                    title={this.props.article.author.username}
-                    subheader={moment(this.props.article.createdAt).format("MMMM D, YYYY")}
-                    classes={{root: this.props.classes.cardHeader}}
+                    title={article.author.username}
+                    subheader={moment(article.createdAt).format("MMMM D, YYYY")}
+                    classes={{root: classes.cardHeader}}
                 />
-                <CardContent classes={{root: this.props.classes.cardContent}}>
+                <CardContent classes={{root: classes.cardContent}}>
                     <Typography variant="h5" component="h5">
-                        { this.props.article.title }
+                        { article.title }
                     </Typography>
-                    <Typography className={this.props.classes.description} color="textSecondary" variant="body1">
-                        { this.props.article.description }
+                    <Typography className={classes.description} color="textSecondary" variant="body1">
+                        { article.description }
                     </Typography>
                 </CardContent>
-                <CardActions  classes={{root: this.props.classes.actions}}>
-                    <Typography variant="body2" component="p" color="textSecondary" classes={{root: this.props.classes.readMore}}>
+                <CardActions  classes={{root: classes.actions}}>
+                    <Typography variant="body2" component="div" color="textSecondary" classes={{root: classes.readMore}}>
                         Read more...
-                        { this.props.article.tagList.map((tag) => <Chip label={tag} clickable/>) }
+                        { article.tagList.map((tag, index) => <Chip label={tag} clickable key={index} variant="outlined" classes={{root: classes.tag}}/>) }
                     </Typography>
                 </CardActions>
             </Card>

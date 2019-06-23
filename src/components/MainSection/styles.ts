@@ -2,16 +2,21 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 
 const styles = (theme: Theme) => 
     createStyles({
+        root: {
+            paddingLeft: 0,
+            paddingRight: 0
+        },
         tabs: {
             borderBottom: '1px solid #e8e8e8'
         },
         postsContainer: {
-            paddingTop: "0",
-            paddingBottom: "0"
+            paddingLeft: 0,
+            paddingTop: 0,
+            paddingBottom: 0
         },
         filtersContainer: {
-            paddingTop: "0",
-            paddingBottom: "0",
+            paddingTop: 0,
+            paddingBottom: 0,
             maxWidth: "30%"
         },
         tabTitle: {

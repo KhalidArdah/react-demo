@@ -1,4 +1,4 @@
-import { createStyles, Theme } from "@material-ui/core/styles";
+import { createStyles } from "@material-ui/core/styles";
 
 const styles = () => 
     createStyles({
@@ -12,7 +12,8 @@ const styles = () =>
         },
         tag: {
             backgroundColor: "#818a91",
-            color: "white"
+            color: "white",
+            margin: "2px"
         }
     })
 

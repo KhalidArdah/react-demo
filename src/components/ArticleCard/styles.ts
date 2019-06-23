@@ -1,6 +1,6 @@
-import { createStyles } from "@material-ui/core/styles";
+import { createStyles, Theme } from "@material-ui/core/styles";
 
-const styles = () => 
+const styles = (theme: Theme) => 
     createStyles({
         card: {
             padding: "1.5rem 0",
@@ -51,6 +51,9 @@ const styles = () =>
         favIcon: {
             marginRight: "7px",
             fontSize: "1rem"
+        },
+        tag: {
+            color: theme.palette.text.secondary
         }
     })
 

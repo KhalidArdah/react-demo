@@ -46,16 +46,18 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 		this.setState({ tabIndex: value });
 	}
 	render() {
+		const { classes } = this.props;
+		const { tabIndex } = this.state;
 		return (
 			<Container maxWidth="lg">
-				<Box display="flex" p={1}>
-					<Box p={1} flexGrow={2} className={this.props.classes.postsContainer}>
-						<Tabs value={this.state.tabIndex} onChange={this.handleTabChange} className={this.props.classes.tabs}>
-							{this.tabs.map((tab, index) => <Tab key={index} label={tab.title} className={this.props.classes.tabTitle} />)}
+				<Box display="flex" p={1} className={classes.root}>
+					<Box p={1} flexGrow={2} className={classes.postsContainer}>
+						<Tabs value={tabIndex} onChange={this.handleTabChange} className={classes.tabs}>
+							{this.tabs.map((tab, index) => <Tab key={index} label={tab.title} className={classes.tabTitle} />)}
 						</Tabs>
-						{this.tabs[this.state.tabIndex].content}
+						{this.tabs[tabIndex].content}
 					</Box>
-					<Box p={1} flexGrow={1} className={this.props.classes.filtersContainer}>
+					<Box p={1} flexGrow={1} className={classes.filtersContainer}>
 						<TagsFilter tags={this.filterTags} action={this.filterArticles}/>
 					</Box>
 				</Box>

@@ -29,7 +29,7 @@ export class GlobalFeedTab extends PureComponent<WithStyles<typeof styles>> {
 	render() {
 		return (
             <div>
-				{ this.articles.map((article) => <ArticleCard article={article}/>) }
+				{ this.articles.map((article, index) => <ArticleCard article={article} key={index}/>) }
 			</div>
 		);
 	}

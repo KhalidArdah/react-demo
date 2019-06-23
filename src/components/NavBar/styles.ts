@@ -3,7 +3,6 @@ import { createStyles } from "@material-ui/core/styles";
 const styles = () => 
     createStyles({
         navBar: {
-            padding: 5
         },
         navMenu: {
             display: "inline-block",
