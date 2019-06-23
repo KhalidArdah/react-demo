@@ -5,6 +5,7 @@ import styles from "./styles";
 import Box from '@material-ui/core/Box';
 import { Container, Tabs, Tab, Typography } from "@material-ui/core";
 import MainSectionState from "./MainSectionState";
+import TagsFilter from "../TagsFilter";
 
 const TabContainer: FunctionComponent = (props) => (
 	<Typography component="div" style={{ padding: "1.5rem 0" }}>
@@ -44,7 +45,7 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 						{this.tabs[this.state.tabIndex].content}
 					</Box>
 					<Box p={1} flexGrow={1} className={this.props.classes.filtersContainer}>
-						filters
+						<TagsFilter />
 					</Box>
 				</Box>
 			</Container>

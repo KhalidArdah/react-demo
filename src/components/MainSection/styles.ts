@@ -8,7 +8,8 @@ const styles = (theme: Theme) =>
         },
         filtersContainer: {
             paddingTop: "0",
-            paddingBottom: "0"
+            paddingBottom: "0",
+            maxWidth: "33%"
         },
         tabTitle: {
             textTransform: "none",
