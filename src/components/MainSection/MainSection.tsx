@@ -8,6 +8,8 @@ import DemoTabContent from "./DemoTabContent";
 import TagsFilter from "../TagsFilter";
 import { TabContainer } from "./TabContainer";
 import Article from "../../interfaces/Article";
+import Header from "../Header";
+import { RouteComponentProps } from "@reach/router";
 
 const articles: Article[] = [
 	{
@@ -33,7 +35,7 @@ const generalFeedTab: DemoTab = {
 	content: <TabContainer><DemoTabContent articles={articles}/></TabContainer>
 };
 
-export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSectionState> {
+export class MainSection extends PureComponent<RouteComponentProps & WithStyles<typeof styles>, MainSectionState> {
 	state: MainSectionState = {
 		/* index of active tab */
 		tabIndex: 0,
@@ -91,19 +93,22 @@ export class MainSection extends PureComponent<WithStyles<typeof styles>, MainSe
 		const { classes } = this.props;
 		const { tabIndex, tabs } = this.state;
 		return (
-			<Container maxWidth="lg">
-				<Box display="flex" p={1} className={classes.root}>
-					<Box p={1} flexGrow={2} className={classes.postsContainer}>
-						<Tabs value={tabIndex} onChange={this.handleTabChange} className={classes.tabs}>
-							{tabs.map((tab, index) => <Tab key={index} label={tab.title} className={classes.tabTitle} />)}
-						</Tabs>
-						{tabs[tabIndex].content}
+			<>
+				<Header />
+				<Container maxWidth="lg">
+					<Box display="flex" p={1} className={classes.root}>
+						<Box p={1} flexGrow={2} className={classes.postsContainer}>
+							<Tabs value={tabIndex} onChange={this.handleTabChange} className={classes.tabs}>
+								{tabs.map((tab, index) => <Tab key={index} label={tab.title} className={classes.tabTitle} />)}
+							</Tabs>
+							{tabs[tabIndex].content}
+						</Box>
+						<Box p={1} flexGrow={1} className={classes.filtersContainer}>
+							<TagsFilter tags={this.filtrationTags} action={this.filterArticles}/>
+						</Box>
 					</Box>
-					<Box p={1} flexGrow={1} className={classes.filtersContainer}>
-						<TagsFilter tags={this.filtrationTags} action={this.filterArticles}/>
-					</Box>
-				</Box>
-			</Container>
+				</Container>
+			</>
 		);
 	}
 }

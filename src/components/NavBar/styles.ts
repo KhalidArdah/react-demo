@@ -15,8 +15,7 @@ const styles = () =>
                 float: "left",
                 "& a": {
                     display: "block",
-                    paddingTop: ".425rem",
-                    paddingBottom: ".425rem",
+                    paddingTop: "0.2rem",
                     margin: "0 5px",
                     textDecoration: "none",
                     color: "rgba(0, 0, 0, 0.3)",
