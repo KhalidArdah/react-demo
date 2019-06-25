@@ -8,7 +8,7 @@ export class Footer extends PureComponent<WithStyles<typeof styles>> {
 	render() {
 		return (
 			<div className={this.props.classes.root}>
-				<a href="https://github.com/KhalidArdah/react" target="_blank">
+				<a href="https://github.com/KhalidArdah/react" target="_blank" rel="noopener noreferrer">
 					<FontAwesomeIcon icon={faGithub} />
 					&nbsp;
 					Fork on GitHub

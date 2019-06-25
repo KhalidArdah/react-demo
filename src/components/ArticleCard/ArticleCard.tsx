@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { WithStyles } from "@material-ui/core/styles/withStyles";
 import styles from "./styles";
 import { Card, CardContent, Typography, CardActions, Avatar, CardHeader, Chip, IconButton, withStyles } from "@material-ui/core";
-import Article from "../../interfaces/Article";
+import { Article } from "../../interfaces/Article";
 import moment from "moment";
 import Favorite from "@material-ui/icons/Favorite";
 import Badge from '@material-ui/core/Badge';
@@ -38,7 +38,7 @@ export class ArticleCard extends PureComponent<ArticleCardProps & WithStyles<typ
                     }
                     action={
                         <IconButton aria-label="Cart" classes={{root: cn(classes.favBtn, {selected: article.favorited})}} onClick={this.handleBadgeClick}>
-                            <StyledBadge badgeContent={article.favoritesCount}>
+                            <StyledBadge badgeContent={article.favoritesCount || "0"}>
                                 <Favorite classes={{root: classes.favIcon}}/>
                             </StyledBadge>
                         </IconButton>
@@ -57,8 +57,10 @@ export class ArticleCard extends PureComponent<ArticleCardProps & WithStyles<typ
                 </CardContent>
                 <CardActions  classes={{root: classes.actions}}>
                     <Typography variant="body2" component="div" color="textSecondary" classes={{root: classes.readMore}}>
-                        Read more...
-                        { article.tagList.map((tag, index) => <Chip label={tag} clickable key={index} variant="outlined" classes={{root: classes.tag}}/>) }
+                        <span className={classes.readMoreText}>Read more...</span>
+                        <div>
+                            { article.tagList.map((tag, index) => <Chip label={tag} clickable key={index} variant="outlined" classes={{root: classes.tag}}/>) }
+                        </div>
                     </Typography>
                 </CardActions>
             </Card>
