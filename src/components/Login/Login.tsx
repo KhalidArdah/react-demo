@@ -2,9 +2,37 @@ import React, { PureComponent } from "react";
 import { WithStyles } from "@material-ui/core/styles/withStyles";
 import styles from "./styles";
 import { RouteComponentProps } from "@reach/router";
-import { Container, CssBaseline, Avatar, Typography, TextField, Button, Grid, Link } from "@material-ui/core";
+import { Container, Typography, TextField, Button } from "@material-ui/core";
 
-export class Login extends PureComponent<RouteComponentProps & WithStyles<typeof styles>> {
+interface LoginState {
+	user: User
+}
+
+interface User {
+	email: string,
+	password: string
+}
+
+export class Login extends PureComponent<RouteComponentProps & WithStyles<typeof styles>, LoginState > {
+	state = {
+		user: {
+			email: "",
+			password: ""
+		}
+	}
+
+	handleSubmit = () => {
+	}
+
+	handleTextFieldChange = (event: any) => {
+		event.persist();
+		this.setState((state, props) => {
+			const user: any = state.user;
+			(user[event.target.name] = event.target.value);
+			return { user };
+		});
+	}
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -28,6 +56,7 @@ export class Login extends PureComponent<RouteComponentProps & WithStyles<typeof
 				  autoComplete="email"
 				  className={classes.textField}
 				  autoFocus
+				  onInput={this.handleTextFieldChange}
 				/>
 				<TextField
 				  variant="outlined"
@@ -40,6 +69,7 @@ export class Login extends PureComponent<RouteComponentProps & WithStyles<typeof
 				  id="password"
 				  autoComplete="current-password"
 				  className={classes.textField}
+				  onInput={this.handleTextFieldChange}
 				/>
 				<Button
 				  type="submit"
@@ -47,6 +77,7 @@ export class Login extends PureComponent<RouteComponentProps & WithStyles<typeof
 				  color="secondary"
 				  size="large"
 				  className={classes.submit}
+				  onClick={this.handleSubmit}
 				>
 				  Sign In
 				</Button>

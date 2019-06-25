@@ -7,91 +7,74 @@ import { MainSectionState, DemoTab } from "./MainSectionState";
 import DemoTabContent from "./DemoTabContent";
 import TagsFilter from "../TagsFilter";
 import { TabContainer } from "./TabContainer";
-import Article from "../../interfaces/Article";
 import Header from "../Header";
 import { RouteComponentProps } from "@reach/router";
-
-const articles: Article[] = [
-	{
-		author: {
-			following: false,
-			image: "https://static.productionready.io/images/smiley-cyrus.jpg",
-			username: "1234qwer1234"
-		},
-		body: "sdfasdfasdfasdfasdf↵## Hi↵",
-		createdAt: "2019-06-19T05:16:01.795Z",
-		description: "rsadfasdfa",
-		favorited: false,
-		favoritesCount: 3,
-		slug: "1234qwerqwe-7sl7z8",
-		tagList: ["myaw"],
-		title: "1234qwerqwe",
-		updatedAt: "2019-06-19T05:16:01.795Z"
-	}
-];
-
-const generalFeedTab: DemoTab = {
-	title: "Global Feed",
-	content: <TabContainer><DemoTabContent articles={articles}/></TabContainer>
-};
+import "node-fetch";
 
 export class MainSection extends PureComponent<RouteComponentProps & WithStyles<typeof styles>, MainSectionState> {
-	state: MainSectionState = {
-		/* index of active tab */
-		tabIndex: 0,
-		/* main section tabs */
-		tabs: [
-			generalFeedTab
-		]
+	constructor(props: RouteComponentProps & WithStyles<typeof styles>) {
+		super(props);
+
+		this.generalFeedTab = this.getTab();
+
+		this.state = {
+			/* index of active tab */
+			tabIndex: 0,
+			/* main section tabs */
+			tabs: [this.generalFeedTab],
+			/* globalFeed articles */
+			allArticles: { articles: [], articlesCount: 0 },
+			/* filtered articles */
+			filteredArticles: { articles: [], articlesCount: 0 },
+			/* tags to filter */
+			filtrationTags: []
+		}
+	}
+	generalFeedTab: {
+		title: string,
+		content: TabContainer
+	};
+
+	getTab = (tag: string = "") => {
+		let title = "Global Feed";
+		if(tag) {
+			title = "# " + tag;
+		}
+		return {
+			title,
+			content: <TabContainer><DemoTabContent tag={tag}/></TabContainer>
+		}
 	}
 
-	filtrationTags: string[] = [
-		"khalid",
-		"test"
-	];
+	componentDidMount() {
+		// get filtration tags
+		this.getFiltrationTags().then((filtrationTags) => {
+			this.setState({ filtrationTags: filtrationTags.tags });
+		});
+	}
 
-	filterArticles = (tag: string) => {
+	getFiltrationTags() {
+		return fetch("https://conduit.productionready.io/api/tags").then(response => response.json());
+	}
+
+	filterArticles = (tag: string = "") => {
 		// filter
-		const filteredArticles = this.getFilteredArticles(tag);
-		const newTab = {
-			title: "# " + tag,
-			content: <TabContainer><DemoTabContent articles={filteredArticles}/></TabContainer>
-		};
 		const tabs: DemoTab[] = [
-			generalFeedTab,
-			newTab
+			this.generalFeedTab,
+			this.getTab(tag)
 		];
-		this.setState({tabs: tabs, tabIndex: 1});
+		this.setState({tabs, tabIndex: tabs.length-1});
 	}
 
 	handleTabChange = (event: React.ChangeEvent<{}>, value: number) => {
 		this.setState({ tabIndex: value });
 	}
 
-	getFilteredArticles = (tag: string) => {
-		return [
-			{
-				author: {
-					following: false,
-					image: "https://static.productionready.io/images/smiley-cyrus.jpg",
-					username: "filtered"
-				},
-				body: "sdfasdfasdfasdfasdf↵## Hi↵",
-				createdAt: "2019-07-19T05:10:01.795Z",
-				description: "myaw",
-				favorited: true,
-				favoritesCount: 5,
-				slug: "1234qwerqwe-7sl7z8",
-				tagList: ["none"],
-				title: "title",
-				updatedAt: "2019-01-19T05:11:01.795Z"
-			}
-		];
-	}
+
 
 	render() {
 		const { classes } = this.props;
-		const { tabIndex, tabs } = this.state;
+		const { tabIndex, tabs, filtrationTags } = this.state;
 		return (
 			<>
 				<Header />
@@ -101,10 +84,10 @@ export class MainSection extends PureComponent<RouteComponentProps & WithStyles<
 							<Tabs value={tabIndex} onChange={this.handleTabChange} className={classes.tabs}>
 								{tabs.map((tab, index) => <Tab key={index} label={tab.title} className={classes.tabTitle} />)}
 							</Tabs>
-							{tabs[tabIndex].content}
+							{tabs.length?tabs[tabIndex].content: []}
 						</Box>
 						<Box p={1} flexGrow={1} className={classes.filtersContainer}>
-							<TagsFilter tags={this.filtrationTags} action={this.filterArticles}/>
+							<TagsFilter tags={filtrationTags} action={this.filterArticles}/>
 						</Box>
 					</Box>
 				</Container>

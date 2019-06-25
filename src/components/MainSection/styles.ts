@@ -7,7 +7,7 @@ const styles = (theme: Theme) =>
             paddingRight: 0
         },
         tabs: {
-            borderBottom: '1px solid #e8e8e8'
+            
         },
         postsContainer: {
             paddingLeft: 0,
@@ -17,7 +17,8 @@ const styles = (theme: Theme) =>
         filtersContainer: {
             paddingTop: 0,
             paddingBottom: 0,
-            maxWidth: "30%"
+            maxWidth: "30%",
+            minWidth: "30%"
         },
         tabTitle: {
             textTransform: "none",

@@ -1,4 +1,4 @@
-export default interface Article {
+export interface Article {
 	author: {
 		bio?: string,
 		following: boolean,
@@ -14,4 +14,9 @@ export default interface Article {
 	tagList: string[],
 	title: string,
 	updatedAt: string
+}
+
+export interface Articles {
+	articles: Article[],
+	articlesCount: number
 }

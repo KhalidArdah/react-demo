@@ -8,10 +8,10 @@ export class NavBar extends PureComponent<WithStyles<typeof styles>> {
 	render() {
 		return (
 			<Container maxWidth="lg" className={this.props.classes.navBar}>
-				<a className={this.props.classes.brand}>conduit</a>
+				<span className={this.props.classes.brand}>conduit</span>
 				<ul className={this.props.classes.navMenu}>
-					<li><a href="#"><Link to="/home">Home</Link></a></li>
-					<li><a href="#"><Link to="/login">Sign in</Link></a></li>
+					<li><Link to="/home">Home</Link></li>
+					<li><Link to="/login">Sign in</Link></li>
 				</ul>
 			</Container>
 		);

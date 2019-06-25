@@ -5,11 +5,11 @@ const styles = (theme: Theme) =>
         card: {
             padding: "1.5rem 0",
             minWidth: 275,
-            borderWidth: "0 0 1px 0",
+            borderWidth: "1px 0 0 0",
             borderStyle: "solid",
             boxShadow: "none",
             borderRadius: 0,
-            borderColor: "lightgray"
+            borderColor: "#e8e8e8"
         },
         cardHeader: {
             padding: 0,
@@ -35,6 +35,9 @@ const styles = (theme: Theme) =>
                 float: "right"
             }
         },
+        readMoreText: {
+            lineHeight: 2
+        },
         favBtn: {
             padding: "5px 9px 5px 0px",
             width: "47px",
@@ -53,7 +56,8 @@ const styles = (theme: Theme) =>
             fontSize: "1rem"
         },
         tag: {
-            color: theme.palette.text.secondary
+            color: theme.palette.text.secondary,
+            margin: 1
         }
     })
 

@@ -11,6 +11,7 @@ const styles = () =>
             padding: 15,
             background: "linear-gradient(#485563, #29323c)",
             boxShadow: "0 5px 5px 5px rgba(0,0,0,0.4)",
+            zIndex: 1,
 
             "& a": {
                 color: "#fff",
